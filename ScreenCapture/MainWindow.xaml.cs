@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
@@ -82,13 +82,13 @@ namespace ScreenCapture
                 captureGraphics.CopyFromScreen(captureRectangle.Left, captureRectangle.Top, 0, 0, captureRectangle.Size);
                 captureGraphics.Dispose();
 
-                
                 vFWriter.WriteVideoFrame(captureBitmap);
 
 
                 return captureBitmap;
             } catch(Exception e)
             {
+                Console.WriteLine(e);
                 return new Bitmap(Screen.PrimaryScreen.WorkingArea.Width, Screen.PrimaryScreen.WorkingArea.Height, PixelFormat.Format24bppRgb);
             }
         }
@@ -96,10 +96,7 @@ namespace ScreenCapture
         //Function called every 42 ms
         //Takes a bitmap image and displays on the main window
         public void DisplayImage(Bitmap screenCap)
-        {
-            screenCap.Save(System.Windows.Forms.Application.StartupPath + "\\Temp\\" + count.ToString() + ".jpeg");
-         
-            count++;
+        {         
             System.Windows.Controls.Image dynamicImage = new System.Windows.Controls.Image();
             var bitmapImage = new BitmapImage();
 
@@ -135,7 +132,7 @@ namespace ScreenCapture
             }
             catch (Exception error)
             {
-
+                Console.WriteLine(error);
             }
         }
     }
